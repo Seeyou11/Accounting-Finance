@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@model IEnumerable<WebApplication2.Models.AccountingFinance>
+
+<div class="text-center">
+<div class="form-group row">
+        <h1> @ViewData["PageTitle"]</h1>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Office_rent</th>
+                <th>Employee_salary</th>
+                <th>Paid_tax</th>
+                <th>Office_supply</th>
+                <th>Sold_software</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var account in Model){
+                <tr>
+                    <td>@account.CreatedAt</td>
+                    <td>@account.OfficeRentprice</td>
+                    <td>@account.EmployeeSalary</td>
+                    <td>@account.TaxPrice</td>
+                    <td>@account.OfficeSupplyPrice</td>
+                    <td>@account.SoldSWPrice</td> 
+                    <td>
+                        <a asp-controller="home" asp-action="Detailes" asp-route-id="@account.Id" class="btn btn-primary">Details</a>
+                        <a  asp-controller="home" asp-action="Edit" asp-route-id="@account.Id" class="btn btn-success">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+  
+
+</div>

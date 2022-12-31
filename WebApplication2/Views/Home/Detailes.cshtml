@@ -1,0 +1,150 @@
+﻿@using System;@*
+@model WebApplication2.Models.AccountingFinance*@
+
+
+@model WebApplication2.viewModeles.DetailesViewModel 
+
+@{
+    ViewData["Title"] = "Detailes page";
+}
+<h1>@ViewData["Title"]</h1>
+
+<br />
+<div>
+    Date: @Model.CreatedAt
+</div>
+<div>
+    Office rent price: @Model.OfficeRentprice
+</div>
+<div>
+    Employee Salary: @Model.EmployeeSalary
+</div>
+<div>
+    Tax price: @Model.TaxPrice
+</div>
+<div>
+    Office supply price: @Model.OfficeSupplyPrice
+</div>
+<div>
+    Sold SW price: @Model.SoldSWPrice
+</div>
+<br />
+     <h2 >Trial Balance</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Ledger Account  </th> 
+            <th>Dr</th>
+            <th>Cr</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        
+            <tr>
+                <td>office Rent</td>
+                <td>@Model.OfficeRentprice</td>
+                <td>0</td>
+            </tr>
+
+        <tr>
+            <td>Employee Salary</td>
+            <td>@Model.EmployeeSalary</td>
+            <td>0</td>
+        </tr>
+
+        <tr>
+            <td>Income Tax</td>
+            <td>@Model.TaxPrice</td>
+            <td>0</td>
+        </tr>
+
+        <tr>
+            <td>office supply</td>
+            <td>@Model.OfficeSupplyPrice</td>
+            <td>0</td>
+        </tr>
+        <tr>@{
+                var Cash = @Model.SoldSWPrice - (@Model.OfficeSupplyPrice + @Model.TaxPrice + @Model.EmployeeSalary + @Model.OfficeRentprice);
+            }
+
+            <td>Cash account</td>
+            <td>@Cash</td>
+            <td>0</td>
+
+        </tr>
+
+        <tr>
+            <td>Sold SW</td>
+            <td>0</td>
+            <td>@Model.SoldSWPrice</td>
+            
+        </tr>
+        
+    </tbody>
+</table>
+<br />
+<div>
+<h2>Financial Statment</h2>
+<h4>Income Statement</h4>
+</div>
+
+<p>Revenue(Income) &nbsp;&nbsp;&nbsp; @Model.SoldSWPrice</p>
+<p>Expenses</p>
+<div>&nbsp;&nbsp;&nbsp;&nbsp; Income Tax: &nbsp; @Model.TaxPrice</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp; office Rent: &nbsp; @Model.OfficeRentprice</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp; EmployeeSalary: &nbsp; @Model.EmployeeSalary</div>
+<div>
+    Net Income = Revenue(Income) - Expenses
+</div>
+<div>
+    Net Income = @Model.SoldSWPrice - (@Model.TaxPrice + @Model.OfficeRentprice + @Model.EmployeeSalary)
+</div>
+
+@{
+   var  NetIncome = @Model.SoldSWPrice - (@Model.TaxPrice + @Model.OfficeRentprice + @Model.EmployeeSalary);
+}
+<div>
+    Net Income = @NetIncome
+</div>
+<br />
+<div>
+    <h4>Balance Sheet</h4>
+</div>
+
+<p>Asset</p>
+<div>&nbsp;&nbsp;&nbsp;&nbsp; Cash: &nbsp; @Cash</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp; office supply: &nbsp; @Model.OfficeSupplyPrice</div>
+
+<div>
+    &nbsp;&nbsp;&nbsp;&nbsp; Total Asset = Cash + office supply
+</div>
+<div>
+    &nbsp;&nbsp;&nbsp;&nbsp; Total Asset = @Cash + @Model.OfficeSupplyPrice
+</div>
+
+@{
+    var TotalAsset = @Cash + @Model.OfficeSupplyPrice;
+}
+<div>
+    &nbsp;&nbsp;&nbsp;&nbsp;Total Asset  = @TotalAsset
+</div>
+<div>
+    Liability  &nbsp;&nbsp;&nbsp;&nbsp;      there is no liability
+ </div>
+ <div>
+    Equity      &nbsp;&nbsp;&nbsp;&nbsp;     there is no equity
+ </div>
+
+<div>
+    <h2>Accounting Equation</h2>
+</div>
+<div>
+    Asset = Liability + capital(equity + net income)
+</div>
+<div>
+    @TotalAsset = 0 + capital(0 + @NetIncome)
+</div>
+<div>
+    @TotalAsset = 0 + 0 + @NetIncome
+</div>
